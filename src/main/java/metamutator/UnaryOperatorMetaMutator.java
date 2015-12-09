@@ -23,7 +23,7 @@ public class UnaryOperatorMetaMutator extends AbstractProcessor<CtExpression<Boo
 	
 	private static final EnumSet<UnaryOperatorKind> UNARY_OPERATORS = EnumSet.of(UnaryOperatorKind.NOT);
 	
-	private Set<CtElement> hostSpots = Sets.newHashSet();
+	private Set<CtElement> hotSpots = Sets.newHashSet();
 	
 	@Override
 	public boolean isToBeProcessed(CtExpression<Boolean> element) {
@@ -53,7 +53,7 @@ public class UnaryOperatorMetaMutator extends AbstractProcessor<CtExpression<Boo
 	}
 	
 	private boolean alreadyInHotsSpot(CtElement element) {
-		return hostSpots.contains(element);
+		return hotSpots.contains(element);
 	}
 	
 	private void mutateOperator(CtExpression<Boolean> booleanExpression, EnumSet<UnaryOperatorKind> operators) {
@@ -67,14 +67,17 @@ public class UnaryOperatorMetaMutator extends AbstractProcessor<CtExpression<Boo
 		}
 		int thisIndex = ++index;
 		
-		CtExpression<Boolean> originalExpression = booleanExpression;
+		String originalExpression = booleanExpression.toString();
+		String newExpression = originalExpression + "|| !" + originalExpression;
 		
-		// TO DO
+		CtCodeSnippetExpression<Boolean> codeSnippet = getFactory().Core()
+				.createCodeSnippetExpression();
+		codeSnippet.setValue('(' + newExpression + ')');
+		
+		booleanExpression.replace(codeSnippet);
 		
 		Selector.generateSelector(booleanExpression,originalExpression.toString(),thisIndex,UNARY_OPERATORS,PREFIX);
 		
-		hostSpots.add(booleanExpression);
+		hotSpots.add(booleanExpression);
 	}
-	
-
 }

@@ -1,4 +1,13 @@
 -------------------------------------------------------------------------------
 Test set: BinaryOperatorMetaMutatorTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.95 sec - in BinaryOperatorMetaMutatorTest
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.034 sec <<< FAILURE! - in BinaryOperatorMetaMutatorTest
+testBinaryOperatorMetaMutator(BinaryOperatorMetaMutatorTest)  Time elapsed: 0.971 sec  <<< ERROR!
+spoon.compiler.ModelBuildingException: The import org.apache cannot be resolved at C:\Users\Étienne\Documents\workspace\metamutator\src\test\java\BinaryOperatorMetaMutatorTest.java:1
+	at spoon.support.compiler.jdt.JDTBasedSpoonCompiler.report(JDTBasedSpoonCompiler.java:506)
+	at spoon.support.compiler.jdt.JDTBasedSpoonCompiler.reportProblems(JDTBasedSpoonCompiler.java:519)
+	at spoon.support.compiler.jdt.JDTBasedSpoonCompiler.build(JDTBasedSpoonCompiler.java:482)
+	at spoon.Launcher.buildModel(Launcher.java:664)
+	at spoon.Launcher.run(Launcher.java:616)
+	at BinaryOperatorMetaMutatorTest.testBinaryOperatorMetaMutator(BinaryOperatorMetaMutatorTest.java:22)
+
