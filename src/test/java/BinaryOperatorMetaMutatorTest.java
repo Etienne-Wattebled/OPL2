@@ -17,7 +17,7 @@ public class BinaryOperatorMetaMutatorTest {
     public void testBinaryOperatorMetaMutator() throws Exception {
         // build the model and apply the transformation
         Launcher l = new Launcher();
-        l.addInputResource("src/test/java");
+        l.addInputResource("src/test/java/Foo.java");
         l.addProcessor(new BinaryOperatorMetaMutator());
         l.run();
 

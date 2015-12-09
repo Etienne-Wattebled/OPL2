@@ -5,17 +5,17 @@ import metamutator.UnaryOperatorMetaMutator;
 import spoon.Launcher;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.visitor.filter.NameFilter;
-/*  
+
 public class UnaryOperatorMetaMutatorTest {
 	@Test
 	 public void testUnaryOperatorMetaMutator() throws Exception {
 		 Launcher l = new Launcher();
 		 
-		 l.addInputResource("src/test/java");
+		 l.addInputResource("src/test/java/Foo.java");
 		 
 		 l.addProcessor(new UnaryOperatorMetaMutator());
 		 
-		 //l.run();
+		 l.run();
 		 
 	     CtClass c = (CtClass) l.getFactory().Package().getRootPackage().getElements(new NameFilter("Foo")).get(0);
 
@@ -25,4 +25,4 @@ public class UnaryOperatorMetaMutatorTest {
 	     Interpreter bsh = new Interpreter();
 	     
 	 }
-}*/
+}
