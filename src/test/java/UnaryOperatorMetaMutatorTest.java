@@ -1,6 +1,9 @@
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 import bsh.Interpreter;
+import metamutator.Selector;
 import metamutator.UnaryOperatorMetaMutator;
 import spoon.Launcher;
 import spoon.reflect.declaration.CtClass;
@@ -24,5 +27,11 @@ public class UnaryOperatorMetaMutatorTest {
 	        
 	     Interpreter bsh = new Interpreter();
 	     
+	     // there is no selector before loading the class
+	     assertEquals(0,Selector.getAllSelectors().size());
+
+	     // creating a new instance of the class
+	     Object o = ((Class) bsh.eval(c.toString())).newInstance();   
+	     //assertEquals(4,Selector.getAllSelectors().size());
 	 }
 }

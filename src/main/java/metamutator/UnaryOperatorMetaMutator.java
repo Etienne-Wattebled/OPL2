@@ -21,7 +21,7 @@ public class UnaryOperatorMetaMutator extends AbstractProcessor<CtExpression<Boo
 	public static final String PREFIX =  "_unaryOperatorHotSpot";
 	private static int index = 0;
 	
-	private enum UnaryOperator {
+	public enum UnaryOperator {
 		NOT,
 		SAME
 	};
@@ -32,6 +32,12 @@ public class UnaryOperatorMetaMutator extends AbstractProcessor<CtExpression<Boo
 	
 	@Override
 	public boolean isToBeProcessed(CtExpression<Boolean> element) {
+		String type = element.getType().toString();
+		System.out.println(type);
+		
+		if (!type.toUpperCase().equals("BOOLEAN")) {
+			return false;
+		}
 		try {
 			Selector.getTopLevelClass(element);
 		} catch (NullPointerException e) {
@@ -79,7 +85,7 @@ public class UnaryOperatorMetaMutator extends AbstractProcessor<CtExpression<Boo
 				.map(op -> {
 					String expr = originalExpression;
 					if (op == UnaryOperator.NOT) {
-						expr = "!" + originalExpression;
+						expr = "!(" + originalExpression + ")";
 					}
 					return String.format("("+ PREFIX + "%s.is(\"%s\") && (%s))",
 							thisIndex,op, expr);
