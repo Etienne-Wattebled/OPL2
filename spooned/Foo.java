@@ -15,10 +15,10 @@ public class Foo {
         return ((_unaryOperatorHotSpot3.is("NOT") && (!((Foo.class) == c))) || (_unaryOperatorHotSpot3.is("SAME") && ((Foo.class) == c)));
     }
 
-    private static final metamutator.Selector _unaryOperatorHotSpot1 = metamutator.Selector.of(1,new metamutator.UnaryOperatorMetaMutator.UnaryOperator[]{java.lang.String.a || b,metamutator.UnaryOperatorMetaMutator.UnaryOperator.NOT,metamutator.UnaryOperatorMetaMutator.UnaryOperator.SAME}).in(Foo.class).id("_unaryOperatorHotSpot1");
+    private static final metamutator.Selector _unaryOperatorHotSpot1 = metamutator.Selector.of(1,new metamutator.UnaryOperatorMetaMutator.UnaryOperator[]{metamutator.UnaryOperatorMetaMutator.UnaryOperator.SAME,metamutator.UnaryOperatorMetaMutator.UnaryOperator.NOT}).in(Foo.class).id("_unaryOperatorHotSpot1");
 
-    private static final metamutator.Selector _unaryOperatorHotSpot2 = metamutator.Selector.of(2,new metamutator.UnaryOperatorMetaMutator.UnaryOperator[]{java.lang.String.a > b,metamutator.UnaryOperatorMetaMutator.UnaryOperator.NOT,metamutator.UnaryOperatorMetaMutator.UnaryOperator.SAME}).in(Foo.class).id("_unaryOperatorHotSpot2");
+    private static final metamutator.Selector _unaryOperatorHotSpot2 = metamutator.Selector.of(2,new metamutator.UnaryOperatorMetaMutator.UnaryOperator[]{metamutator.UnaryOperatorMetaMutator.UnaryOperator.SAME,metamutator.UnaryOperatorMetaMutator.UnaryOperator.NOT}).in(Foo.class).id("_unaryOperatorHotSpot2");
 
-    private static final metamutator.Selector _unaryOperatorHotSpot3 = metamutator.Selector.of(3,new metamutator.UnaryOperatorMetaMutator.UnaryOperator[]{java.lang.String.(Foo.class) == c,metamutator.UnaryOperatorMetaMutator.UnaryOperator.NOT,metamutator.UnaryOperatorMetaMutator.UnaryOperator.SAME}).in(Foo.class).id("_unaryOperatorHotSpot3");
+    private static final metamutator.Selector _unaryOperatorHotSpot3 = metamutator.Selector.of(3,new metamutator.UnaryOperatorMetaMutator.UnaryOperator[]{metamutator.UnaryOperatorMetaMutator.UnaryOperator.SAME,metamutator.UnaryOperatorMetaMutator.UnaryOperator.NOT}).in(Foo.class).id("_unaryOperatorHotSpot3");
 }
 

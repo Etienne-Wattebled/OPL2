@@ -33,7 +33,6 @@ public class UnaryOperatorMetaMutator extends AbstractProcessor<CtExpression<Boo
 	@Override
 	public boolean isToBeProcessed(CtExpression<Boolean> element) {
 		String type = element.getType().toString();
-		System.out.println(type);
 		
 		if (!type.toUpperCase().equals("BOOLEAN")) {
 			return false;
@@ -98,7 +97,7 @@ public class UnaryOperatorMetaMutator extends AbstractProcessor<CtExpression<Boo
 		
 		booleanExpression.replace(codeSnippet);
 		
-		Selector.generateSelector(booleanExpression,originalExpression.toString(),thisIndex,UNARY_OPERATORS,PREFIX);
+		Selector.generateSelector(booleanExpression,UnaryOperator.SAME,thisIndex,UNARY_OPERATORS,PREFIX);
 		
 		hotSpots.add(booleanExpression);
 	}
