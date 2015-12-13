@@ -13,6 +13,7 @@ import spoon.reflect.code.CtCodeSnippetExpression;
 import spoon.reflect.code.CtExpression;
 import spoon.reflect.code.UnaryOperatorKind;
 import spoon.reflect.declaration.CtAnonymousExecutable;
+import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtConstructor;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtField;
@@ -58,9 +59,22 @@ public class UnaryOperatorMetaMutator extends AbstractProcessor<CtExpression<Boo
 	}
 	
 	private boolean alreadyInHotsSpot(CtElement element) {
+//		CtElement parent = element.getParent();
+//		while (!isTopLevel(parent) && parent != null) {
+//			if (hotSpots.contains(parent))
+//				return true;
+//
+//			parent = parent.getParent();
+//		}
+//
+//		return false;
 		return hotSpots.contains(element);
 	}
 	
+//	private boolean isTopLevel(CtElement parent) {
+//		return parent instanceof CtClass && ((CtClass) parent).isTopLevel();
+//	}
+//	
 	private void mutateOperator(CtExpression<Boolean> booleanExpression, EnumSet<UnaryOperator> operators) {
 		if (alreadyInHotsSpot(booleanExpression)
 				|| booleanExpression.toString().contains(".is(\"")) {
