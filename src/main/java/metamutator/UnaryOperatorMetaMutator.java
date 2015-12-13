@@ -5,14 +5,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.Sets;
-import com.sun.javafx.fxml.expression.Expression;
 
 import spoon.processing.AbstractProcessor;
-import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtCodeSnippetExpression;
 import spoon.reflect.code.CtExpression;
-import spoon.reflect.code.UnaryOperatorKind;
 import spoon.reflect.declaration.CtAnonymousExecutable;
+import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtConstructor;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtField;
@@ -32,9 +30,8 @@ public class UnaryOperatorMetaMutator extends AbstractProcessor<CtExpression<Boo
 	
 	@Override
 	public boolean isToBeProcessed(CtExpression<Boolean> element) {
-		String type = element.getType().toString();
 		
-		if (!type.toUpperCase().equals("BOOLEAN")) {
+		if (!isABooleanExpression(element)) {
 			return false;
 		}
 		try {
@@ -57,24 +54,39 @@ public class UnaryOperatorMetaMutator extends AbstractProcessor<CtExpression<Boo
 		
 		return true;
 	}
-	
+	public boolean isABooleanExpression(CtExpression<Boolean> element) {
+		String type = element.getType().toString().toUpperCase();
+		return type.contains("BOOLEAN");
+	}
 	public void process(CtExpression<Boolean> booleanExpression) {
-		mutateOperator(booleanExpression,UNARY_OPERATORS);
-	}
-	
-	private boolean alreadyInHotsSpot(CtElement element) {
-		return hotSpots.contains(element);
-	}
-	
-	private void mutateOperator(CtExpression<Boolean> booleanExpression, EnumSet<UnaryOperator> operators) {
-		if (alreadyInHotsSpot(booleanExpression)
-				|| booleanExpression.toString().contains(".is(\"")) {
+		
+		if (alreadyInHotsSpot(booleanExpression) || booleanExpression.toString().contains(".is(\"")) {
 			System.out
 					.println(String
 							.format("Expression '%s' ignored because it is included in previous hot spot",
 									booleanExpression));
 			return;
 		}
+
+		mutateOperator(booleanExpression,UNARY_OPERATORS);
+	}
+	
+	private boolean alreadyInHotsSpot(CtElement element) {
+		CtElement parent = element.getParent();
+		while (!isTopLevel(parent) && parent != null) {
+			if (hotSpots.contains(parent))
+				return true;
+
+			parent = parent.getParent();
+		}
+
+		return false;
+	}
+	private boolean isTopLevel(CtElement parent) {
+		return parent instanceof CtClass && ((CtClass) parent).isTopLevel();
+	}
+	
+	private void mutateOperator(CtExpression<?> booleanExpression, EnumSet<UnaryOperator> operators) {
 		int thisIndex = ++index;
 		
 		String originalExpression = booleanExpression.toString();
@@ -95,7 +107,7 @@ public class UnaryOperatorMetaMutator extends AbstractProcessor<CtExpression<Boo
 				.createCodeSnippetExpression();
 		codeSnippet.setValue('(' + newExpression + ')');
 		
-		booleanExpression.replace(codeSnippet);
+		((CtExpression<Boolean>)booleanExpression).replace(codeSnippet);
 		
 		Selector.generateSelector(booleanExpression,UnaryOperator.SAME,thisIndex,UNARY_OPERATORS,PREFIX);
 		

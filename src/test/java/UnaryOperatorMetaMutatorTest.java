@@ -1,8 +1,10 @@
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+import static org.apache.commons.lang.reflect.MethodUtils.invokeExactMethod;
 
 import bsh.Interpreter;
+import metamutator.BinaryOperatorMetaMutator;
 import metamutator.Selector;
 import metamutator.UnaryOperatorMetaMutator;
 import spoon.Launcher;
@@ -32,6 +34,8 @@ public class UnaryOperatorMetaMutatorTest {
 
 	     // creating a new instance of the class
 	     Object o = ((Class) bsh.eval(c.toString())).newInstance();   
-	     //assertEquals(4,Selector.getAllSelectors().size());
+	     
+	     assertEquals(4,Selector.getAllSelectors().size()); 
+	     
 	 }
 }
