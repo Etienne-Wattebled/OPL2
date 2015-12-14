@@ -7,6 +7,7 @@ import bsh.Interpreter;
 import metamutator.BinaryOperatorMetaMutator;
 import metamutator.Selector;
 import metamutator.UnaryOperatorMetaMutator;
+import metamutator.UnaryOperatorMetaMutator.UnaryOperator;
 import spoon.Launcher;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.visitor.filter.NameFilter;
@@ -34,8 +35,14 @@ public class UnaryOperatorMetaMutatorTest {
 
 	     // creating a new instance of the class
 	     Object o = ((Class) bsh.eval(c.toString())).newInstance();   
-	     
 	     assertEquals(4,Selector.getAllSelectors().size()); 
 	     
+	     Selector ba = Selector.getSelectorByName(UnaryOperatorMetaMutator.PREFIX + "1");
+	     ba.choose(1);
+	     
+	     Selector bb = Selector.getSelectorByName(UnaryOperatorMetaMutator.PREFIX + "2");
+	     bb.choose(1);
+	     
+	     assertEquals(true,invokeExactMethod(o,"op",new Object[] { Boolean.TRUE, Boolean.FALSE }));
 	 }
 }
