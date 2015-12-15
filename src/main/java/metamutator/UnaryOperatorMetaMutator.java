@@ -24,7 +24,7 @@ public class UnaryOperatorMetaMutator extends AbstractProcessor<CtExpression<Boo
 		SAME
 	};
 	
-	private static final EnumSet<UnaryOperator> UNARY_OPERATORS = EnumSet.of(UnaryOperator.NOT,UnaryOperator.SAME);
+	private static final EnumSet<UnaryOperator> UNARY_OPERATORS = EnumSet.of(UnaryOperator.SAME,UnaryOperator.NOT);
 	
 	private Set<CtElement> hotSpots = Sets.newHashSet();
 	
