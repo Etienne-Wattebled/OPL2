@@ -1,5 +1,3 @@
-package ressources;
-
 public class Foo {
 	
 	public boolean op(Boolean a, Boolean b) {
